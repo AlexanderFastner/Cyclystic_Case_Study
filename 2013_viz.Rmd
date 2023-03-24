@@ -1,0 +1,159 @@
+#
+title: "2013"
+author: "Alexander Fastner"
+date: "2023-01-18"
+output: html_document
+#
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Imports, message=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(lubridate)
+library(magrittr)
+library(dplyr)
+library(data.table)
+library(scales)
+```
+
+```{r data loading, message=FALSE}
+df_2013_stations <- data.table(read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/cleanedData/2013/df_2013_stations.csv", sep = ",", header = TRUE))
+df_2013_trips <- data.table(read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/cleanedData/2013/df_2013_trips.csv", sep = ",", header = TRUE))
+#remove x col
+df_2013_stations$X <- NULL
+df_2013_trips$X <- NULL
+```
+
+
+```{r}
+summary(df_2013_stations)
+```
+```{r}
+summary(df_2013_trips)
+```
+Some NAs in Gender and Birthday cols of trips data
+```{r check NAs}
+df_2013_stations[rowSums(is.na(df_2013_stations))>0,]
+df_2013_trips[rowSums(is.na(df_2013_trips))>0,]
+```
+```{r add days of week}
+df_2013_trips$day_of_week <- lubridate::wday(df_2013_trips$starttime, label=TRUE, abbr=FALSE)
+df_2013_trips
+```
+```{r add ride length}
+df_2013_trips$starttime <- ymd_hm(df_2013_trips$starttime)
+df_2013_trips$stoptime <- ymd_hm(df_2013_trips$stoptime)
+
+df_2013_trips <- df_2013_trips[, ride_length := as.integer(stoptime - starttime)]
+#df_2013_trips$ride_length <- df_2013_trips[difftime(stoptime, starttime, units = "mins")]
+df_2013_trips
+```
+
+```{r distribution of ride duration}
+ggplot(df_2013_trips, aes(ride_length, fill = "red")) +
+  geom_histogram(color = "black", show.legend = FALSE) +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Distribution of ride duration: 2013") + 
+  xlab("Ride duration in minutes")
+
+
+ggplot(df_2013_trips, aes(ride_length, fill = "red")) +
+  geom_histogram(color = "black", show.legend = FALSE) +
+  scale_x_continuous(limits = c(0, 60), breaks = c(0,5,10,15,20,25,30,35,40,45,50,55,60)) +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Distribution of ride duration under 60 min: 2013") + 
+  xlab("Ride duration in minutes")
+
+
+under_720mins <- data.table(df_2013_trips[ride_length > 720,])
+ggplot(under_720mins, aes(ride_length, fill = "red")) +
+  geom_histogram(color = "black", show.legend = FALSE) +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Distribution of ride duration over 12h: 2013") + 
+  xlab("Ride duration in minutes")
+
+```
+
+```{r distribution of number of rides by Weekday}
+df_2013_trips$weekday_factor <- factor(df_2013_trips$day_of_week, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+
+ggplot(df_2013_trips, aes(weekday_factor)) +
+  geom_bar(fill = "blue", show.legend = FALSE) +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Distribution of rides by Weekday: 2013") + 
+  xlab("Weekday") +
+  ylab("Count")
+```
+```{r Distribution of rides by time of day}
+#Use starttime, and remove all trips with duration > 4h
+under240min <- data.table(df_2013_trips[ride_length > 240,])
+under240min$starttime <- format(under240min$starttime, "%H:%M")
+under240min$starttime <- lubridate::hour(hm(under240min$starttime)) * 100 + lubridate::minute(hm(under240min$starttime))
+
+under240min$weekday_factor <- factor(under240min$day_of_week, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+
+
+#TODO write function to make convert numeric into HH:MM for labels
+ggplot(under240min, aes(x = weekday_factor, y = starttime, group=weekday_factor)) + 
+  geom_boxplot(fill = "red") +
+  scale_y_continuous(limits = c(0, 2400), breaks = seq(0, 2400, by = 120)) +
+  ggtitle("Distribution of rides by time of day: 2013") + 
+  xlab("Weekday") +
+  ylab("Ride starttimes in Minutes")
+```
+
+```{r Distribution of rides by Month}
+#TODO distribution of rides per month
+#TODO distribution of mean ride dur/month
+#TODO distribution of mean ride starttime/month
+```
+
+
+```{r Breakdown of ride length by Weekday}
+#create bins for ride_length
+df_2013_trips$binned_ride_length <- cut(df_2013_trips$ride_length, breaks = c(0, 10, 30, 60, 120, 240, 480, 720, 1500), labels = c("0-10", "10-30", "30-60", "60-120", "120-240", "240-480", "480-720", "720-1500"))
+#create sums table to plot. # of rides in each bin, for each day
+bd <- data.table(table(df_2013_trips$binned_ride_length, df_2013_trips$day_of_week))
+bd <- rename(bd, day_of_week = V2)
+bd <- rename(bd, binned_ride_length = V1)
+bd <- rename(bd, value = N)
+
+bd$weekday_factor <- factor(bd$day_of_week, levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+
+#total # of rides breakdown
+ggplot(bd, aes(x = weekday_factor, y = value, fill = binned_ride_length)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Distribution of rides by Weekday: 2013") + 
+  xlab("Weekday") +
+  ylab("Total number of rides")
+
+#total ride duration
+ggplot(df_2013_trips, aes(x = weekday_factor, y = ride_length, fill = binned_ride_length)) + 
+  geom_bar(stat = "identity") +
+  scale_y_continuous(labels = scales::comma) +
+  ggtitle("Distribution of rides by Weekday by ride duration: 2013") + 
+  xlab("Weekday") +
+  ylab("Total ride length")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,273 @@
+#
+title: "first look"
+author: "Alexander Fastner"
+date: "2022-12-30"
+output: html_document
+#
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r Imports}
+library(ggplot2)
+library(tidyverse)
+```
+
+```{r data loading 2013}
+#2013
+df_2013_trips <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2013.csv", sep = ",", header = TRUE)
+df_2013_stations <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2013.csv", sep = ",", header = TRUE)
+```
+
+```{r data loading 2014}
+# 2014
+df_2014_tripsQ1Q2 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2014_Q1Q2.csv", sep = ",", header = TRUE)
+df_2014_tripsQ3_07 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2014-Q3-07.csv", sep = ",", header = TRUE)
+df_2014_tripsQ3_0809 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2014-Q3-0809.csv", sep = ",", header = TRUE)
+df_2014_tripsQ4<- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2014-Q4.csv", sep = ",", header = TRUE)
+# Stations
+df_2014_stationsQ1Q2 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2014-Q1Q2.csv", sep = ",", header = TRUE) 
+df_2014_stationsQ3Q4 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2014-Q3Q4.csv", sep = ",", header = TRUE) 
+
+```
+
+```{r data loading 2015}
+# 2015
+df_2015_tripsQ1 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2015-Q1.csv", sep = ",", header = TRUE)
+df_2015_tripsQ2 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2015-Q2.csv", sep = ",", header = TRUE)
+df_2015_tripsQ3_07 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2015_07.csv", sep = ",", header = TRUE)
+df_2015_tripsQ3_08 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2015_08.csv", sep = ",", header = TRUE)
+df_2015_tripsQ3_09 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2015_09.csv", sep = ",", header = TRUE)
+df_2015_tripsQ4 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2015_Q4.csv", sep = ",", header = TRUE)
+
+# Stations
+df_2015_stations <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2015.csv", sep = ",", header = TRUE)
+#
+```
+
+```{r data loading 2016}
+# 2016
+df_2016_tripsQ1 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2016_Q1.csv", sep = ",", header = TRUE)
+df_2016_tripsQ2_04 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2016_04.csv", sep = ",", header = TRUE)
+df_2016_tripsQ2_05 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2016_05.csv", sep = ",", header = TRUE)
+df_2016_tripsQ2_06 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2016_06.csv", sep = ",", header = TRUE)
+df_2016_tripsQ3 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2016_Q3.csv", sep = ",", header = TRUE)
+df_2016_tripsQ4 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2016_Q4.csv", sep = ",", header = TRUE)
+
+#Stations
+df_2016_stationsQ1Q2 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2016_Q1Q2.csv", sep = ",", header = TRUE)
+df_2016_stationsQ3 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2016_Q3.csv", sep = ",", header = TRUE)
+df_2016_stationsQ4 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2016_Q4.csv", sep = ",", header = TRUE)
+#
+```
+
+```{r data loading 2017}
+# 2017
+df_2017_tripsQ1 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2017_Q1.csv", sep = ",", header = TRUE)
+df_2017_tripsQ2 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2017_Q2.csv", sep = ",", header = TRUE)
+df_2017_tripsQ3 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2017_Q3.csv", sep = ",", header = TRUE)
+df_2017_tripsQ4 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2017_Q4.csv", sep = ",", header = TRUE) 
+
+#Stations
+df_2017_stationsQ1Q2 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2017_Q1Q2.csv", sep = ",", header = TRUE)
+df_2017_stationsQ3Q4 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Stations_2017_Q3Q4.csv", sep = ",", header = TRUE)
+#
+```
+
+```{r data loading 2018}
+# 2018
+df_2018_01 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2018_Q1.csv", sep = ",", header = TRUE)
+df_2018_02 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2018_Q2.csv", sep = ",", header = TRUE)
+df_2018_03 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2018_Q3.csv", sep = ",", header = TRUE)
+df_2018_04 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2018_Q4.csv", sep = ",", header = TRUE)
+#
+```
+
+
+```{r data loading 2019}
+# 2019
+df_2019_01 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2019_Q1.csv", sep = ",", header = TRUE)
+df_2019_02 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2019_Q2.csv", sep = ",", header = TRUE)
+df_2019_03 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2019_Q3.csv", sep = ",", header = TRUE)
+df_2019_04 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2019_Q4.csv", sep = ",", header = TRUE)
+#
+```
+
+```{r data loading 2020}
+# 2020
+df_2020_Q1 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/Divvy_Trips_2020_Q1.csv", sep = ",", header = TRUE)
+df_2020_04 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202004-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_05 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202005-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_06 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202006-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_07 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202007-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_08 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202008-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_09 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202009-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_10 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202010-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_11 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202011-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2020_12 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202012-divvy-tripdata.csv", sep = ",", header = TRUE)
+#
+```
+
+
+```{r data loading 2021}
+# 2021
+df_2021_01 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202101-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_02 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202102-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_03 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202103-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_04 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202104-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_05 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202105-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_06 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202106-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_07 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202107-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_08 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202108-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_09 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202109-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_10 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202110-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_11 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202111-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2021_12 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202112-divvy-tripdata.csv", sep = ",", header = TRUE)
+#
+```
+
+```{r data loading 2022}
+# 2022
+df_2022_01 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202201-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_02 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202202-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_03 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202203-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_04 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202204-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_05 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202205-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_06 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202206-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_07 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202207-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_08 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202208-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_09 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202209-divvy-publictripdata.csv", sep = ",", header = TRUE)
+df_2022_10 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202210-divvy-tripdata.csv", sep = ",", header = TRUE)
+df_2022_11 <- read.table("C:/Users/alex/GoogleDataAnalysis/Capstone/data/202211-divvy-tripdata.csv", sep = ",", header = TRUE)
+#
+```
+
+-----
+
+```{r merging 2013}
+# 2013
+write.csv(df_2013_stations, file = "df_2013_stations.csv")
+write.csv(df_2013_trips, file = "df_2013_trips.csv")
+#
+```
+
+```{r merging 2014}
+# 2014
+
+df_2014_stations <- merge(df_2014_stationsQ1Q2, df_2014_stationsQ3Q4, by = c("id", "name", "latitude", "longitude", "dpcapacity"), all.x = TRUE)
+
+df_list_2014_trips <- list(df_2014_tripsQ1Q2, df_2014_tripsQ3_07, df_2014_tripsQ3_0809, df_2014_tripsQ4)
+df_2014_trips <- df_list_2014_trips %>% reduce(full_join)
+#
+
+# save to new combined files for the year
+write.csv(df_2014_stations, file = "df_2014_stations.csv")
+write.csv(df_2014_trips, file = "df_2014_trips.csv")
+#
+```
+
+```{r merging 2015}
+# 2015
+df_list_2015_trips <- list(df_2015_tripsQ1, df_2015_tripsQ2, df_2015_tripsQ3_07, df_2015_tripsQ3_08, df_2015_tripsQ3_09, df_2015_tripsQ4)
+df_2015_trips <- df_list_2015_trips %>% reduce(full_join)
+
+write.csv(df_2015_stations, file = "df_2015_stations.csv")
+write.csv(df_2015_trips, file = "df_2015_trips.csv")
+#
+```
+
+```{r merging 2016}
+# 2016
+df_2016_stations <- list(df_2016_stationsQ1Q2, df_2016_stationsQ3, df_2016_stationsQ4)
+df_2016_stations <- df_2016_stations %>% reduce(full_join)
+
+df_list_2016_trips <- list(df_2016_tripsQ1, df_2016_tripsQ2_04, df_2016_tripsQ2_05, df_2016_tripsQ2_06, df_2016_tripsQ3, df_2016_tripsQ4)
+df_2016_trips <- df_list_2016_trips %>% reduce(full_join)
+
+write.csv(df_2016_stations, file = "df_2016_stations.csv")
+write.csv(df_2016_trips, file = "df_2016_trips.csv")
+#
+```
+
+```{r merging 2017}
+# 2017
+df_2017_stations <- list(df_2017_stationsQ1Q2, df_2017_stationsQ3Q4)
+df_2017_stations <- df_2017_stations %>% reduce(full_join)
+
+df_list_2017_trips <- list(df_2017_tripsQ1, df_2017_tripsQ2, df_2017_tripsQ3, df_2017_tripsQ4)
+df_2017_trips <- df_list_2017_trips %>% reduce(full_join)
+
+write.csv(df_2017_stations, file = "df_2017_stations.csv")
+write.csv(df_2017_trips, file = "df_2017_trips.csv")
+#
+```
+
+```{r merging 2018}
+# 2018
+df_list_2018 <- list(df_2018_01, df_2018_02, df_2018_03, df_2018_04)
+df_2018 <- df_list_2018 %>% reduce(full_join)
+
+write.csv(df_2018, file = "df_2018.csv")
+#
+```
+
+
+```{r merging 2019}
+# 2019
+#TODO need to rename variables to be able to merge
+df_2019_02 <- df_2019_02 %>%
+  rename(trip_id = 1,
+         start_time = 2,
+         end_time = 3,
+         bike_id = 4,
+         trip_duration = 5,
+         from_station_id = 6,
+         from_station_name = 7,
+         to_station_id = 8,
+         to_station_name = 9,
+         usertype = 10,
+         gender = 11,
+         birthyear = 12)
+
+df_list_2019 <- list(df_2019_01, df_2019_02, df_2019_03, df_2019_04)
+df_2019 <- df_list_2019 %>% reduce(full_join)
+
+write.csv(df_2019, file = "df_2019.csv")
+#
+```
+
+```{r merging 2020}
+# 2020
+#coerce datatype
+df_2020_12$start_station_id <- as.integer(df_2020_12$start_station_id)
+df_2020_12$end_station_id <- as.integer(df_2020_12$end_station_id)
+
+
+df_list_2020 <- list(df_2020_Q1, df_2020_04, df_2020_05, df_2020_06, df_2020_07, df_2020_08, df_2020_09, df_2020_10, df_2020_11, df_2020_12)
+df_2020 <- df_list_2020 %>% reduce(full_join)
+
+write.csv(df_2020, file = "df_2020.csv")
+
+#
+```
+
+```{r merging 2021}
+# 2021
+df_list_2021 <- list(df_2021_01, df_2021_02, df_2021_03, df_2021_04, df_2021_05, df_2021_06, df_2021_07, df_2021_08, df_2021_09, df_2021_10, df_2021_11, df_2021_12)
+df_2021 <- df_list_2021 %>% reduce(full_join)
+
+write.csv(df_2021, file = "df_2021.csv")
+#
+```
+
+```{r merging 2022}
+# 2022
+df_list_2022 <- list(df_2022_01, df_2022_02, df_2022_03, df_2022_04, df_2022_05, df_2022_06, df_2022_07, df_2022_08, df_2022_09, df_2022_10, df_2022_11)
+df_2022 <- df_list_2022 %>% reduce(full_join)
+
+write.csv(df_2022, file = "df_2022.csv")
+#
+```
+
+
