@@ -100,6 +100,18 @@ df_2022 <- df_2022[!(df_2022$end_station_name == ""), ]
 df_2022 <- df_2022[!(df_2022$end_station_id == ""), ]
 ```
 
+```{r save a copy of clean data, include=FALSE}
+#filter
+under_1440mins <- data.table(df_2022[ride_length < 1440,])
+under_1440mins$hoursBin <- cut(under_1440mins$ride_length, breaks = c(seq(0, 1440, by = 60)))
+under_1440mins$binned_ride_length <- cut(under_1440mins$ride_length, breaks = c(0, 10, 30, 60, 120, 240, 480, 720, 1440), labels = c("0-10", "10-30", "30-60", "60-120", "120-240", "240-480", "480-720", "720-1440"))
+
+write.csv(under_1440mins, "2022_cleaned.csv")
+```
+
+
+
+
 ## Analysis
 ***  
 
