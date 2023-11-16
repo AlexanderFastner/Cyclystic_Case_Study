@@ -1,6 +1,6 @@
 # Cyclystic_Case_Study
 
-The Project report is available as Case Study Cyclistic.pdf
+The [Project report](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/2022_viz.html) is available as Case Study Cyclistic.pdf
 
 The presentation of findings is under Cyclistic presentation.pptx
 
