@@ -2,3 +2,6 @@ data/
 cleanedData/
 earlyStuff/
 *.csv
+*.RData
+*.Rhistory
+2022_cleaned.csv
