@@ -4,7 +4,7 @@ The Cyclistic Case Study represents a comprehensive exploration into the user da
 
 The Project Description is available as [Case Study Cyclistic.pdf](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/2022_viz.html)  
 
-The R report is accessible as [2022_viz.html](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/2022_viz.html)
+The R report is accessible as [2022_viz.html](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/2022_viz.html)  
 The Rmd file for the R report is here [2022_viz.Rmd](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/2022_viz.Rmd)  
 
 The Presentation of findings for executives can be found here [Cyclistic presentation.pptx](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/Cyclistic-presentation.pptx)  
