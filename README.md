@@ -10,6 +10,6 @@ The Rmd file for the R report is [2022_viz.Rmd](https://github.com/AlexanderFast
 
 ## Some interesting findings when Comparing Members vs NonMembers
 
-[Usage by Weekday](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/Images/compared_stacked_bar.png)  
+![Usage by Weekday](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/Images/compared_stacked_bar.png)  
 
-[Ride Duration](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/Images/ride_duration_distribution.png)
+![Ride Duration](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/Images/ride_duration_distribution.png)
