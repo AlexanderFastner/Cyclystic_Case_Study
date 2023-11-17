@@ -4,10 +4,10 @@ The Cyclistic Case Study represents a comprehensive exploration into the user da
 
 ## Data Overview
 
-          | ride_id          | started_at        | ended_at          | start_station_name       | end_station_name     | member_casual | day_of_week |
-| ---     | ---              | ---               | ---               | ---                      | ---                  | ---          | ---          |
-| 1       | C2F7DD78E82EC875 |2022-01-13 11:59:47|2022-01-13 12:02:44| Glenwood Ave & Touhy Ave | Clark St & Touhy Ave | casual       | Thursday     |
-| 2       | A6CF8980A652D272 |2022-01-10 08:41:56|2022-01-10 08:46:17| Glenwood Ave & Touhy Ave | Clark St & Touhy Ave | casual       | Monday       |
+| row num | ride_id          | started_at        | ended_at          | start_station_name       | end_station_name     | member_casual | day_of_week  |
+| ---     | ---              | ---               | ---               | ---                      | ---                  | ---           | ---          |
+| 1       | C2F7DD78E82EC875 |2022-01-13 11:59:47|2022-01-13 12:02:44| Glenwood Ave & Touhy Ave | Clark St & Touhy Ave | casual        | Thursday     |
+| 2       | A6CF8980A652D272 |2022-01-10 08:41:56|2022-01-10 08:46:17| Glenwood Ave & Touhy Ave | Clark St & Touhy Ave | casual        | Monday       |
 
 The Project Description is available as [ProjectDescription.pdf](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/ProjectDescription.pdf)  
 
