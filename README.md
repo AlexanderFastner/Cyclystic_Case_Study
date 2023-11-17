@@ -11,7 +11,7 @@ The Cyclistic Case Study represents a comprehensive exploration into the user da
 
 The Project Description is available as [ProjectDescription.pdf](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/ProjectDescription.pdf)  
 
-The Presentation of findings for executives can be found here [Cyclistic presentation.pptx](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/Cyclistic-presentation.pptx)  
+The Presentation of findings for executives can be found here [Cyclistic presentation.pptx](https://github.com/AlexanderFastner/Cyclystic_Case_Study/blob/main/Cyclistic presentation.pptx)  
 
 ## A Teaser of some interesting findings when Comparing Members vs NonMembers  
 
