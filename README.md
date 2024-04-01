@@ -1,6 +1,8 @@
 # Cyclystic Case Study
 
-The Cyclistic Case Study represents a comprehensive exploration into the user data of a fictional rideshare company Cyclistic. This Google Data Analysis Capstone Project aims to shed light on user behavior patterns and devise a strategic approach for converting casual users into subscribing members. Through meticulous data analysis and insightful observations| this study unveils key insights that can reshape the company's operational and marketing strategies.
+The Cyclistic Case Study represents a comprehensive exploration into the user data of a fictional rideshare company Cyclistic. 
+This Google Data Analysis Capstone Project aims to shed light on user behavior patterns and devise a strategic approach for converting casual users into subscribing members. 
+Through meticulous data analysis and insightful observations this study unveils key insights that can reshape the company's operational and marketing strategies.
 
 ## Data Overview
 
